@@ -41,3 +41,44 @@ thumbsDown.addEventListener('click', () => {
   thumbsDownIncrease.textContent = count2;
   localStorage.setItem('thumbsDownIncrease', count2);
 });
+
+
+// like button
+
+const strokeLove = document.getElementById('strokeLove');
+const filledLove = document.getElementById('filledLove');
+const message = document.getElementById('message');
+const message2 = document.getElementById('message2');
+
+strokeLove.addEventListener('click', () => {
+    filledLove.classList.toggle('opacity-100');
+    strokeLove.classList.toggle('opacity-0');
+    filledLove.classList.toggle('invisible');
+    
+if(filledLove.classList.contains('opacity-100')) {
+    message.textContent = "You liked this!";
+    message.classList.remove("hidden");
+    message2.classList.add("hidden");
+    setTimeout(() => {
+        message.classList.add("hidden");
+    }, 3000);
+
+}else{
+    message2.textContent = "You unliked this!";
+    message2.classList.remove("hidden");
+    message.classList.add("hidden");
+    setTimeout(() => {
+        message2.classList.add("hidden");
+    }, 3000);
+
+}
+});
+
+
+
+
+
+// filledLove.addEventListener('click', () => {
+//     strokeLove.classList.remove('opacity-100');
+//     filledLove.classList.add('opacity-0');
+// })
