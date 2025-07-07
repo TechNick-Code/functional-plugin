@@ -74,6 +74,48 @@ if(filledLove.classList.contains('opacity-100')) {
 }
 });
 
+// Draggable element in a container
+  document.addEventListener("DOMContentLoaded", () => {
+    const dragMe = document.getElementById('dragMe');
+    const motherBoard = document.getElementById('motherBoard');
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    dragMe.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - dragMe.offsetLeft;
+      offsetY = e.clientY - dragMe.offsetTop;
+      dragMe.classList.replace('cursor-grab', 'cursor-grabbing');
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+
+      const motherBoardRect = motherBoard.getBoundingClientRect();
+      const dragWidth = dragMe.offsetWidth;
+      const dragHeight = dragMe.offsetHeight;
+
+      let x = e.clientX - motherBoardRect.left - offsetX;
+      let y = e.clientY - motherBoardRect.top - offsetY;
+
+      // Constrain within motherBoard
+      x = Math.max(0, Math.min(x, motherBoardRect.width - dragWidth));
+      y = Math.max(0, Math.min(y, motherBoardRect.height - dragHeight));
+
+      dragMe.style.left = `${x}px`;
+      dragMe.style.top = `${y}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      dragMe.classList.replace('cursor-grabbing', 'cursor-grab');
+    });
+  });
+
+
+
 
 
 
